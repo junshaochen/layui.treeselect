@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>TreeSelect Demo</title>
+    <link href="../layui/css/layui.css" rel="stylesheet">
+    <script src="../layui/layui.js"></script>
+</head>
+
+<body>
+
+    <form class="layui-form" style="width:500px; margin:20px;" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">demo1</label>
+            <div class="layui-input-block">
+                <input type="text" id="demo1" name="demo1" placeholder="请选择上级分类" autocomplete="off" class="layui-input">
+                <div>默认渲染效果</div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">demo2</label>
+            <div class="layui-input-block">
+                <input type="text" id="demo2" value="1" name="demo2" placeholder="请选择上级分类" autocomplete="off" class="layui-input">
+                <div>原控件有Value值</div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">demo3</label>
+            <div class="layui-input-block">
+                <input type="text" id="demo3" value="2" name="demo3" placeholder="请选择上级分类" autocomplete="off" class="layui-input">
+                <div>Js动态设置原控件Value值，需设置后调用 $('#id').change()</div>
+                <button id="demo3_btn" class="layui-btn" style="margin:5px 0;">改变Value为 6</button>
+                <div>选中数据：</div>
+                <div id="demo3_text"></div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">demo4</label>
+            <div class="layui-input-block">
+                <input type="text" id="demo4" value="1" name="demo4" placeholder="请选择上级分类" autocomplete="off" class="layui-input">
+                <div>改变Tree Data 并重新渲染</div>
+                <button id="demo4_btn" class="layui-btn" style="margin:5px 0;">重新渲染</button>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">demo5</label>
+            <div class="layui-input-block">
+                <input type="text" id="demo5" name="demo5" placeholder="请选择上级分类" autocomplete="off" class="layui-input">
+                <div>自定义读取TreeData字段数据到原控件，这里演示将Name读取到原控件</div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">demo6</label>
+            <div class="layui-input-block">
+                <input type="text" id="demo6" name="demo6" placeholder="请选择上级分类" autocomplete="off" class="layui-input">
+                <div>搜索框</div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block">
+                <button id="demo_btn" class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" style="margin:5px 0;">查看表单值</button>
+                <div id="demo_text"></div>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        layui.extend({
+            treeselect: '{/}../src/treeselect'
+        });
+        var $;
+        //Demo
+        layui.use(['form', 'treeselect', 'jquery'], function () {
+            var form = layui.form, treeselect = layui.treeselect;
+            $ = layui.jquery;
+            //demo1
+            treeselect.render(
+                {
+                    elem: "#demo1",
+                    data: [{ "id": 11, "name": "4", "spread": true, "children": null }, { "id": 10, "name": "3", "spread": true, "children": null }, { "id": 9, "name": "2", "spread": true, "children": null }, { "id": 8, "name": null, "spread": true, "children": null }, { "id": 7, "name": "1", "spread": true, "children": null }, { "id": 4, "name": "售后", "spread": true, "children": [{ "id": 6, "name": "售后进度", "spread": false, "children": null }, { "id": 5, "name": "售后类型", "spread": false, "children": null }] }, { "id": 3, "name": "经销商", "spread": true, "children": null }, { "id": 1, "name": "销售", "spread": true, "children": [{ "id": 2, "name": "订单类型", "spread": false, "children": null }] }],
+                    // method: "GET",
+                    // datakey: "data"
+                });
+
+            //demo2
+            treeselect.render(
+                {
+                    elem: "#demo2",
+                    data: [{ "id": 3, "name": "经销商", "spread": true, "children": null }, { "id": 1, "name": "销售", "spread": true, "children": [{ "id": 2, "name": "订单类型", "spread": false, "children": null }] }],
+                    // method: "GET",
+                    // datakey: "data"
+                });
+
+            //demo3
+            treeselect.render(
+                {
+                    elem: "#demo3",
+                    data: [{ "id": 10, "name": "3", "spread": true, "children": null }, { "id": 9, "name": "2", "spread": true, "children": null }, { "id": 8, "name": null, "spread": true, "children": null }, { "id": 7, "name": "1", "spread": true, "children": null }, { "id": 4, "name": "售后", "spread": true, "children": [{ "id": 6, "name": "售后进度", "spread": false, "children": null }, { "id": 5, "name": "售后类型", "spread": false, "children": null }] }, { "id": 3, "name": "经销商", "spread": true, "children": null }, { "id": 1, "name": "销售", "spread": true, "children": [{ "id": 2, "name": "订单类型", "spread": false, "children": null }] }],
+                    selectcall: function (d) {
+                        $("#demo3_text").text(JSON.stringify(d));
+                    }
+                    // method: "GET",
+                    // datakey: "data"
+                });
+
+            $("#demo3_btn").click(function () {
+                $('#demo3').val(6);
+                $('#demo3').change();
+                return false;
+            });
+
+            //demo4
+            var demo4 = treeselect.render(
+                {
+                    elem: "#demo4",
+                    data: [{ "id": 10, "name": "3", "spread": true, "children": null }, { "id": 9, "name": "2", "spread": true, "children": null }, { "id": 8, "name": null, "spread": true, "children": null }, { "id": 7, "name": "1", "spread": true, "children": null }, { "id": 4, "name": "售后", "spread": true, "children": [{ "id": 6, "name": "售后进度", "spread": false, "children": null }, { "id": 5, "name": "售后类型", "spread": false, "children": null }] }, { "id": 3, "name": "经销商", "spread": true, "children": null }, { "id": 1, "name": "销售", "spread": true, "children": [{ "id": 2, "name": "订单类型", "spread": false, "children": null }] }],
+
+                });
+            console.log(demo4);
+            $("#demo4_btn").click(function () {
+                demo4.render({
+                    data: [{ "id": 11, "name": "我是改变后数据11", "spread": true, "children": null }, { "id": 12, "name": "我是改变后数据12", "spread": true, "children": null }]
+                })
+                return false;
+            });
+
+            //demo5
+            treeselect.render(
+                {
+                    elem: "#demo5",
+                    data: [{ "id": 11, "name": "4", "spread": true, "children": null }, { "id": 10, "name": "3", "spread": true, "children": null }, { "id": 9, "name": "2", "spread": true, "children": null }, { "id": 8, "name": null, "spread": true, "children": null }, { "id": 7, "name": "1", "spread": true, "children": null }, { "id": 4, "name": "售后", "spread": true, "children": [{ "id": 6, "name": "售后进度", "spread": false, "children": null }, { "id": 5, "name": "售后类型", "spread": false, "children": null }] }, { "id": 3, "name": "经销商", "spread": true, "children": null }, { "id": 1, "name": "销售", "spread": true, "children": [{ "id": 2, "name": "订单类型", "spread": false, "children": null }] }],
+                    valueKey: "name"
+                    // method: "GET",
+                    // datakey: "data"
+                });
+
+            //demo6
+            treeselect.render(
+                {
+                    elem: "#demo6",
+                    data: [{ "id": 11, "name": "4", "spread": true, "children": null }, { "id": 10, "name": "3", "spread": true, "children": null }, { "id": 9, "name": "2", "spread": true, "children": null }, { "id": 8, "name": null, "spread": true, "children": null }, { "id": 7, "name": "1", "spread": true, "children": null }, { "id": 4, "name": "售后", "spread": true, "children": [{ "id": 6, "name": "售后进度", "spread": false, "children": null }, { "id": 5, "name": "售后类型", "spread": false, "children": null }] }, { "id": 3, "name": "经销商", "spread": true, "children": null }, { "id": 1, "name": "销售", "spread": true, "children": [{ "id": 2, "name": "订单类型", "spread": false, "children": null }] }],
+                    search:true
+                    // method: "GET",
+                    // datakey: "data"
+                });
+
+            //监听提交
+            form.on('submit(formDemo)', function (data) {
+                $("#demo_text").text("表单值：" + JSON.stringify(data.field));
+                return false;
+            });
+        });
+    </script>
+</body>
+
+</html>
