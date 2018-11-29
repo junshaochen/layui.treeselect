@@ -1,9 +1,9 @@
-##基于Layui 的树形下拉选择框 treeselect
+## 基于Layui 的树形下拉选择框 treeselect
 [Layui](https://www.layui.com/)
 
 经典模块化前端框架
 
-##参数
+## 参数
 
 | 参数           | 类型               | 默认值                 |描述                                                           |
 |----------------|--------------------|------------------------|---------------------------------------------------------------|
@@ -19,10 +19,10 @@
 | valueKey       | string             | id                     | 绑定到原控件的数据Key                                         |
 | textKey        | string             | name                   | 绑定到渲染控件的数据Key                                       |
 
-##Demo展示
+## Demo展示
 ![Demo](https://github.com/junshaochen/layui.treeselect/blob/master/demo/s.gif)
 
-##有问题反馈
+## 有问题反馈
 在使用中有任何问题，欢迎反馈给我，可以用以下联系方式跟我交流
 
 * 邮件(446252517#qq.com, 把#换成@)
