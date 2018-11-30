@@ -89,6 +89,8 @@ layui.define(['tree', 'jquery'], function (exports) {
                         type: options.method,
                         success: function (d) {
                             options.data = options.datakey ? d[options.datakey] : d;
+                            if(!options.data)
+                                options.data = [];
                             init.call(this);
                         }
                     });
