@@ -48,3 +48,7 @@
     .layui-form-selected .layui-tree .layui-this i{
         color:#fff;
     }
+
+    .layui-form-selected .layui-tree li a:hover{
+        background: #d2d2d2;
+    }
